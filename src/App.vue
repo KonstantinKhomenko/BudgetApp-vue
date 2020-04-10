@@ -22,13 +22,13 @@ export default {
     list: {
       1: {
         type: "INCOME",
-        value: 200,
+        value: 999,
         comment: "Some comment",
         id: 1
       },
       2: {
         type: "OUTCOME",
-        value: 100,
+        value: 222,
         comment: "Some OUTCOME comment",
         id: 2
       }
@@ -71,5 +71,9 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+
+body {
+  background-image: linear-gradient(45deg, rgb(0, 3, 38) 0%, rgb(93, 78, 226) 100%);
 }
 </style>
