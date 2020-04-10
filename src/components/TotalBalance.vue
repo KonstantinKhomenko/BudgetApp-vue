@@ -17,8 +17,8 @@ export default {
 <style scoped>
 .total-value {
   font-size: 26px;
-  text-transform: uppercase;
   padding: 20px;
   text-align: center;
+  color: red;
 }
 </style>

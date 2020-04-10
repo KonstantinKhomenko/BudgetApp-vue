@@ -22,13 +22,13 @@ export default {
     list: {
       1: {
         type: "INCOME",
-        value: 100,
+        value: 200,
         comment: "Some comment",
         id: 1
       },
       2: {
         type: "OUTCOME",
-        value: -50,
+        value: 100,
         comment: "Some OUTCOME comment",
         id: 2
       }
@@ -36,7 +36,16 @@ export default {
   }),
   computed: {
     totalBalance() {
-      return Object.values(this.list).reduce((acc, item) => acc + item.value, 0);
+      return Object.values(this.list).reduce((acc, item) => {
+        if(item.type === 'INCOME') {
+          return acc + item.value;
+        } else if(item.type === 'OUTCOME') {
+          if(item.value < 0) {
+            item.value = Math.abs(item.value);
+          }
+          return acc - item.value;
+        }
+      }, 0);
     }
   },
   methods: {
