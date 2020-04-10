@@ -7,6 +7,7 @@
           :comment="item.comment"
           :value="item.value"
           :id="Number(item.id)"
+          :comeType="item.type"
           @deleteItemTemplate="deleteItem"
           />
         </div>

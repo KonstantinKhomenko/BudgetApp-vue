@@ -20,7 +20,8 @@ export default {
   computed: {
     totalColor() {
       return {
-        'color': this.balanceColor
+        'color': this.balanceColor,
+        'border': `3px ${this.balanceColor} solid`
       }
     }
   },
@@ -48,7 +49,6 @@ export default {
   text-align: center;
   margin: 10px 0;
   background-color: #ffffff;
-  border: 3px rgb(245, 81, 70) solid;
   border-radius: 10px;
   display: inline-block;
   width: 300px;

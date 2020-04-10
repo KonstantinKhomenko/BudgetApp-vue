@@ -1,7 +1,7 @@
 <template>
-  <div class="list-item" >
+  <div class="list-item " :class="icon">
     <span class="budget-comment">{{ comment }}</span>
-    <span class="budget-value">{{ value }}</span>
+    <span class="budget-value" :style="{'color': valueColor}">{{ value }}</span>
     <el-button type="danger" size="mini" @click="deleteItemTemplate(id)">Delete</el-button>
   </div>
 </template>
@@ -9,6 +9,10 @@
 <script>
 export default {
   name: "BudgetListItem",
+  data: () => ({
+    icon: '',
+    valueColor: ''
+  }),
   props: {
     comment: {
       type: String,
@@ -20,6 +24,9 @@ export default {
     },
     id: {
       type: Number
+    },
+    comeType: {
+      type: String
     }
   },
   methods: {
@@ -27,7 +34,23 @@ export default {
       if(confirm('Вы подтверждаете удаление???')) {
         this.$emit("deleteItemTemplate", id);
       }
-    }
+    },
+    setItemStyle() {
+      switch (this.comeType) {
+        case 'INCOME':
+          this.icon = 'el-icon-top';
+          this.valueColor = 'green';
+          break;
+
+        case 'OUTCOME':
+          this.icon = 'el-icon-bottom';
+          this.valueColor = 'red';
+          break;
+      }
+    },
+  },
+  mounted() {
+    this.setItemStyle();
   }
 }
 </script>
@@ -43,5 +66,9 @@ export default {
   font-weight: bold;
   margin-left: auto;
   margin-right: 20px;
+}
+
+.budget-comment {
+  margin-left: 10px;
 }
 </style>
