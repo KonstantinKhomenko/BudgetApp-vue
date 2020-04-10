@@ -24,7 +24,9 @@ export default {
   },
   methods: {
     deleteItemTemplate(id) {
-      this.$emit("deleteItemTemplate", id);
+      if(confirm('Вы подтверждаете удаление???')) {
+        this.$emit("deleteItemTemplate", id);
+      }
     }
   }
 }
