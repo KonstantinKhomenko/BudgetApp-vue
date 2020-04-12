@@ -2,9 +2,9 @@
   <div id="app">
     <Form @submitForm="onFormSubmit"/>
     <TotalBalance :total="totalBalance"/>
-    <el-button type="primary" size="mini" plain @click="showGeneralList">Show all</el-button>
-    <el-button type="success" size="mini" plain @click="showSortedList('INCOME')">Only Income</el-button>
-    <el-button type="danger" size="mini" plain @click="showSortedList('OUTCOME')">Only Outcome</el-button>
+    <el-button type="primary" size="small" icon="el-icon-sort" @click="showGeneralList"></el-button>
+    <el-button type="success" size="small" icon="el-icon-top" @click="showSortedList('INCOME')"></el-button>
+    <el-button type="danger" size="small" icon="el-icon-bottom" @click="showSortedList('OUTCOME')"></el-button>
     <BudgetList :list="mainList" @deleteItem="onDeleteItem"/>
   </div>
 </template>
