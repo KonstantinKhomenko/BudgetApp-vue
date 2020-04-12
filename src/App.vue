@@ -2,9 +2,11 @@
   <div id="app">
     <Form @submitForm="onFormSubmit"/>
     <TotalBalance :total="totalBalance"/>
-    <el-button type="primary" size="small" icon="el-icon-sort" @click="showGeneralList"></el-button>
-    <el-button type="success" size="small" icon="el-icon-top" @click="showSortedList('INCOME')"></el-button>
-    <el-button type="danger" size="small" icon="el-icon-bottom" @click="showSortedList('OUTCOME')"></el-button>
+    <div class="btns-wrap">
+      <el-button type="primary" size="small" icon="el-icon-sort" @click="showGeneralList"></el-button>
+      <el-button type="success" size="small" icon="el-icon-top" @click="showSortedList('INCOME')"></el-button>
+      <el-button type="danger" size="small" icon="el-icon-bottom" @click="showSortedList('OUTCOME')"></el-button>
+    </div>
     <BudgetList :list="mainList" @deleteItem="onDeleteItem"/>
   </div>
 </template>
@@ -55,12 +57,10 @@ export default {
   computed: {
     totalBalance() {
       return Object.values(this.list).reduce((acc, item) => {
+        item.value = Math.abs(item.value);
         if(item.type === 'INCOME') {
           return acc + item.value;
         } else if(item.type === 'OUTCOME') {
-          if(item.value < 0) {
-            item.value = Math.abs(item.value);
-          }
           return acc - item.value;
         }
       }, 0);
@@ -118,10 +118,16 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 40px;
+  margin-top: 20px;
 }
 
 body {
   background-image: linear-gradient(45deg, rgb(0, 3, 38) 0%, rgb(93, 78, 226) 100%);
+}
+
+.btns-wrap {
+  max-width: 500px;
+  margin: auto;
+  display: flex;
 }
 </style>

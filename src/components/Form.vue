@@ -21,25 +21,38 @@
 <script>
 export default {
   name: "Form",
-  data: () => ({
-    formData: {
-      type: "INCOME",
-      comment: "",
-      value: 0
-    },
-    rules: {
-      type: [
-        { required: true, message: "Please select type", trigger: "blur" }
-      ],
-      comment: [
-        { required: true, message: "Please input comment", trigger: "change" }
-      ],
-      value: [
-        { required: true, message: "Please input value", trigger: "change" },
-        { type: "number", message: "Value must be a number", trigger: "change" }
-      ]
+  data() {
+
+    const checkValue = (rule, value, callback) => {
+      if (value === 0) {
+        return callback(new Error('Введите значение больше 0'));
+      } else {
+        callback();
+      }
     }
-  }),
+
+    return {
+      formData: {
+        type: "INCOME",
+        comment: "",
+        value: 0
+      },
+      rules: {
+        type: [
+          { required: true, message: "Please select type", trigger: "blur" }
+        ],
+        comment: [
+          { required: true, message: "Please input comment", trigger: "change" }
+        ],
+        value: [
+          { required: true, message: "Please input value", trigger: "change" },
+          { type: "number", message: "Value must be a number", trigger: "change" },
+          { validator: checkValue, trigger: 'change' }
+        ]
+      }
+    }
+  },
+  
   methods: {
     onSubmit() {
       this.$refs.addItemForm.validate(valid => {
