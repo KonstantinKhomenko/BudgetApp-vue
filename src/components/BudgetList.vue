@@ -51,6 +51,6 @@ export default {
 <style scoped>
 .budget-list-wrap {
   max-width: 500px;
-  margin: auto;
+  margin: 20px auto;
 }
 </style>

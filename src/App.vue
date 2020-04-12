@@ -2,7 +2,10 @@
   <div id="app">
     <Form @submitForm="onFormSubmit"/>
     <TotalBalance :total="totalBalance"/>
-    <BudgetList :list="list" @deleteItem="onDeleteItem"/>
+    <el-button type="primary" size="mini" plain @click="showGeneralList">Show all</el-button>
+    <el-button type="success" size="mini" plain @click="showSortedList('INCOME')">Only Income</el-button>
+    <el-button type="danger" size="mini" plain @click="showSortedList('OUTCOME')">Only Outcome</el-button>
+    <BudgetList :list="mainList" @deleteItem="onDeleteItem"/>
   </div>
 </template>
 
@@ -18,22 +21,37 @@ export default {
     TotalBalance,
     Form
   },
+
   data: () => ({
     list: {
       1: {
         type: "INCOME",
-        value: 999,
-        comment: "Some comment",
+        value: 25000,
+        comment: "Зарплата",
         id: 1
       },
       2: {
         type: "OUTCOME",
-        value: 222,
-        comment: "Some OUTCOME comment",
+        value: 5000,
+        comment: "Квартплата",
         id: 2
+      },
+      3: {
+        type: "INCOME",
+        value: 10000,
+        comment: "Аванс",
+        id: 3
+      },
+      4: {
+        type: "OUTCOME",
+        value: 2000,
+        comment: "Продукты",
+        id: 4
       }
-    }
+    },
+    mainList: {}
   }),
+
   computed: {
     totalBalance() {
       return Object.values(this.list).reduce((acc, item) => {
@@ -48,17 +66,47 @@ export default {
       }, 0);
     }
   },
+
   methods: {
     onDeleteItem(id) {
       this.$delete(this.list, id);
     },
+
     onFormSubmit(data) {
       const newObj = {
         ...data,
         id: String(Math.random())
       };
       this.$set(this.list, newObj.id, newObj);
+    },
+
+    showGeneralList() {
+      this.templateObj(this.list);
+    },
+
+    templateObj(obj) {
+      this.mainList = {
+        ...obj
+      };
+    },
+
+    showSortedList(itemType) {
+      const sortArr = Object.values(this.list).filter(item => item.type === itemType);
+      const sortObj = sortArr.reduce((acc, item) => {
+        acc[item.id] = item;
+        return acc;
+      }, {});
+
+      this.templateObj(sortObj);
     }
+  },
+
+  mounted() {
+    this.showGeneralList();
+  },
+
+  watch: {
+    list: 'showGeneralList'
   }
 };
 </script>
@@ -70,7 +118,7 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  margin-top: 40px;
 }
 
 body {

@@ -47,10 +47,9 @@ export default {
   font-size: 26px;
   padding: 20px;
   text-align: center;
-  margin: 10px 0;
+  margin: 20px auto;
   background-color: #ffffff;
   border-radius: 10px;
-  display: inline-block;
   width: 300px;
 }
 </style>
