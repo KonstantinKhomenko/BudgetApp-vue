@@ -30,25 +30,29 @@ export default {
         type: "INCOME",
         value: 25000,
         comment: "Зарплата",
-        id: 1
+        id: 1,
+        date: '31.04'
       },
       2: {
         type: "OUTCOME",
         value: 5000,
         comment: "Квартплата",
-        id: 2
+        id: 2,
+        date: '22.05'
       },
       3: {
         type: "INCOME",
         value: 10000,
         comment: "Аванс",
-        id: 3
+        id: 3,
+        date: '15.09'
       },
       4: {
         type: "OUTCOME",
         value: 2000,
         comment: "Продукты",
-        id: 4
+        id: 4,
+        date: '22.05'
       }
     },
     mainList: {}

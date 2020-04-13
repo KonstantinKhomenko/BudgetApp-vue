@@ -1,11 +1,29 @@
 <template>
   <el-card class="form-card">
-    <el-form :model="formData" ref="addItemForm" :rules="rules" label-position="top">
+    <el-form
+      :model="formData"
+      ref="addItemForm"
+      :rules="rules"
+      label-position="top"
+    >
       <el-form-item label="Type" prop="type">
-        <el-select class="type-select" v-model="formData.type" placeholder="Choose type...">
+        <el-select
+          class="type-select"
+          v-model="formData.type"
+          placeholder="Choose type..."
+        >
           <el-option label="Income" value="INCOME" />
           <el-option label="Outcome" value="OUTCOME" />
         </el-select>
+      </el-form-item>
+      <el-form-item label="Date" prop="date">
+        <el-date-picker
+          type="date"
+          format="d.MM"
+          value-format="d.MM"
+          placeholder="Pick a date"
+          v-model="formData.date"
+        ></el-date-picker>
       </el-form-item>
       <el-form-item label="Comments" prop="comment">
         <el-input v-model="formData.comment" />
@@ -22,18 +40,18 @@
 export default {
   name: "Form",
   data() {
-
     const checkValue = (rule, value, callback) => {
       if (value === 0) {
-        return callback(new Error('Введите значение больше 0'));
+        return callback(new Error("Введите значение больше 0"));
       } else {
         callback();
       }
-    }
+    };
 
     return {
       formData: {
         type: "INCOME",
+        date: "",
         comment: "",
         value: 0
       },
@@ -46,18 +64,22 @@ export default {
         ],
         value: [
           { required: true, message: "Please input value", trigger: "change" },
-          { type: "number", message: "Value must be a number", trigger: "change" },
-          { validator: checkValue, trigger: 'change' }
+          {
+            type: "number",
+            message: "Value must be a number",
+            trigger: "change"
+          },
+          { validator: checkValue, trigger: "change" }
         ]
       }
-    }
+    };
   },
-  
+
   methods: {
     onSubmit() {
       this.$refs.addItemForm.validate(valid => {
-        if(valid) {
-          this.$emit('submitForm', { ...this.formData });
+        if (valid) {
+          this.$emit("submitForm", { ...this.formData });
           this.$refs.addItemForm.resetFields();
         }
       });

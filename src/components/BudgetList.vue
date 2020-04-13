@@ -8,6 +8,7 @@
           :value="item.value"
           :id="Number(item.id)"
           :comeType="item.type"
+          :date="item.date"
           @deleteItemTemplate="deleteItem"
           />
         </div>
