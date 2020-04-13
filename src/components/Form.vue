@@ -59,6 +59,9 @@ export default {
         type: [
           { required: true, message: "Please select type", trigger: "blur" }
         ],
+        date: [
+          { required: true, message: "Please select date", trigger: "change" }
+        ],
         comment: [
           { required: true, message: "Please input comment", trigger: "change" }
         ],
